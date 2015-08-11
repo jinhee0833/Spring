@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+
+<!DOCTYPE sqlMap       
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"       
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd"> 
+
+<sqlMap namespace="media"> <!-- 자바의 패키지처럼 그룹을 만들어주는 역활을 함 -->
+
+  <!-- DTO class의 별명 선언, 객체 생성이 아님 --> 
+  <typeAlias alias="mediaDTO" type="sts.blog.media.MediaDTO"/> 
+
+  <!-- 레코드 추가 -->    
+  <insert id="insert" parameterClass="mediaDTO"> 
+    <selectKey keyProperty="mediano" resultClass="int"> 
+      SELECT NVL(MAX(mediano), 0)+1 as mediano FROM media 
+    </selectKey> 
+     
+    INSERT INTO media(mediano, title, rdate, poster, filename, filesize, mview, mediagroupno)
+    VALUES(#mediano#, #title#, sysdate, #poster#, #filename#, #filesize#, 'Y', #mediagroupno#)
+
+  </insert> 
+
+  <!-- parameterClass="int": mediagroupno 전달용 선언 -->
+  <select id="list" parameterClass="int" resultClass="mediaDTO"> 
+    SELECT mediano, title, rdate, poster, filename, filesize, mview, mediagroupno
+    FROM media
+    WHERE mediagroupno = #mediagroupno#
+    ORDER BY mediano DESC
+  </select> 
+
+  <select id="read" parameterClass="int" resultClass="mediaDTO"> 
+    SELECT mediano, title, rdate, poster, filename, filesize, mview, mediagroupno
+    FROM media
+    WHERE mediano=#mediano#
+  </select> 
+     
+
+  <!-- 레코드 수정, 수정된 레코드수 리턴 --> 
+  <update id="update" parameterClass="mediaDTO"> 
+    UPDATE media
+    SET title=#title#, poster=#poster#, filename=#filename#, filesize=#filesize#
+    WHERE mediano=#mediano# 
+  </update> 
+
+
+  <!-- 레코드 삭제, 삭제된 레코드수 리턴 --> 
+  <delete id="delete" parameterClass="int"> 
+    DELETE FROM media
+    WHERE mediano=#mediano#
+  </delete> 
+
+</sqlMap>
+
+
+

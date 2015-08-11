@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="">
+	<insert id="add" parameterType="dto">
+		insert into hobby values( hobby_seq.nextval,#{name},#{title},#{content},#{gender},#{hobby},#{img_file_name})
+	</insert>
+	
+	<select id="selectAll" resultType="dto">
+		select * from hobby
+	</select>
+	
+	<select id="detail" parameterType="int" resultType="dto">
+		select * from hobby where hobby_idx=#{idx}
+	</select>
+	
+	<delete id="delete" parameterType="int">
+		delete from hobby where hobby_idx=#{idx}
+	</delete>
+	
+	<update id="update" parameterType="dto">
+		update hobby set name=#{name},title=#{title},gender=#{gender},hobby=#{hobby},img_file_name=#{upload_f} where hobby_idx=#{hobby_idx}
+	</update>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+

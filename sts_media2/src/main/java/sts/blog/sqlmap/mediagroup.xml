@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+
+<!DOCTYPE sqlMap       
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"       
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd"> 
+
+<sqlMap namespace="mediagroup"> <!-- 자바의 패키지처럼 그룹을 만들어주는 역활을 함 -->
+
+  <!-- DTO class의 별명 선언, 객체 생성이 아님 --> 
+  <typeAlias alias="mediagroupDTO" type="sts.blog.mediagroup.MediagroupDTO"/> 
+
+  <!-- 레코드 추가 -->    
+  <insert id="insert" parameterClass="mediagroupDTO"> 
+    <!-- keyProperty: 번호를 저장할 컬럼명, 
+       resultClass: int숫자 형태 
+       memotwono = #memotwono# 
+       #: PreparedStatement의 ?와 같은 역활을 하며 자동으로 
+          DTO의 getter가 호출되어 값이 대입됨.  
+       INSERT후 keyProperty(PK)의 값이 리턴됨. 
+    --> 
+    <selectKey keyProperty="mediagroupno" resultClass="int"> 
+      SELECT NVL(MAX(mediagroupno), 0)+1 as mediagroupno FROM mediagroup 
+      <!-- SELECT memotwo_seq.nextval as memotwono FROM dual -->  
+    </selectKey> 
+     
+    INSERT INTO mediagroup(mediagroupno, title)
+    VALUES(#mediagroupno#, #title#)
+
+  </insert> 
+
+
+  <!-- 1개 이상의 레코드 출력 SQL, SQL 종료 후 세미콜론 사용 금지  
+       resultClass의 선언에 따라 컬럼과 변수가 매핑됨, 
+       DTO가 자동생성되어 List에 추가되어 리턴. 
+  --> 
+  <select id="list" resultClass="mediagroupDTO"> 
+    SELECT mediagroupno, title
+    FROM mediagroup
+    ORDER BY mediagroupno ASC
+  </select> 
+
+
+  <!-- 1개의 레코드 출력 SQL 
+       mediagroupno를 입력받아 하나의 레코드 출력 SQL 
+       parameterClass: 이 SQL 쿼리로 전달되는 인수의 타입 
+       resultClass   : SELECT하여 저장할 DTO 객체 
+       #mediagroupno#: ?와 pstmt.setInt(1, mediagroupno)의 기능을 함 
+   --> 
+  <select id="read" parameterClass="int" resultClass="mediagroupDTO"> 
+    SELECT mediagroupno, title
+    FROM mediagroup
+    WHERE mediagroupno = #mediagroupno#
+  </select> 
+     
+
+  <!-- 레코드 수정, 수정된 레코드수 리턴 --> 
+  <update id="update" parameterClass="mediagroupDTO"> 
+    UPDATE mediagroup
+    SET title = #title#
+    WHERE mediagroupno = #mediagroupno#
+  </update> 
+
+
+  <!-- 레코드 삭제, 삭제된 레코드수 리턴 --> 
+  <delete id="delete" parameterClass="int"> 
+    DELETE FROM mediagroup
+    WHERE mediagroupno = #mediagroupno#
+  </delete> 
+
+</sqlMap> 
+
+

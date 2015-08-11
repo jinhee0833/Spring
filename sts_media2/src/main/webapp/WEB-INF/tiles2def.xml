@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE  tiles-definitions PUBLIC
+    "-//Aapche Software Foundation//DTD Tiles Configuration 2.0//EN"
+    "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+    <!-- *********************************************** 
+         상속을 이용하여 header, footer를 자동으로 조합 
+         *********************************************** -->
+         
+    <!-- 메인 레이아웃 시작 -->
+    <definition name="summer" template="/menu/summerLayout.jsp">
+        <put-attribute name="header" value="/menu/summerHeader.jsp" />
+        <put-attribute name="footer" value="/menu/footer.jsp" />
+    </definition>
+    
+    <definition name="foll" template="/menu/follLayout2.jsp">
+        <put-attribute name="header" value="/menu/follHeader2.jsp" />
+        <put-attribute name="footer" value="/menu/footer.jsp" />
+    </definition>
+    
+    <!-- 메인 레이아웃 끝 -->
+
+
+    <!-- 상세 페이지 레이아웃 -->
+
+    <!-- *****************mediagroup 관련 View 선언***************** -->
+    <!-- mav.setViewName("/index"); -->
+    <definition name="/index" extends="summer">
+        <put-attribute name="title" value="MediaGroup index 2.0" />
+        <put-attribute name="body" value="/index.jsp" />
+    </definition>
+        
+    <!-- mav.setViewName("/mediagroup/list"); -->
+    <definition name="/mediagroup/list" extends="summer">
+        <put-attribute name="title" value="MediaGroup list 2.0" />
+        <put-attribute name="body" value="/mediagroup/list.jsp" />
+    </definition>
+    
+    <!-- mav.setViewName("/mediagroup/createForm"); -->
+    <definition name="/mediagroup/createForm" extends="summer">
+        <put-attribute name="title" value="MediaGroup createForm 2.0" />
+        <put-attribute name="body" value="/mediagroup/createForm.jsp" />
+    </definition>
+       
+    <!-- mav.setViewName("/mediagroup/msgView"); -->
+    <definition name="/mediagroup/msgView" extends="summer">
+        <put-attribute name="title" value="MediaGroup msgView 2.0" />
+        <put-attribute name="body" value="/mediagroup/msgView.jsp" />
+    </definition>       
+
+    <!-- mav.setViewName("/mediagroup/updateForm"); -->
+    <definition name="/mediagroup/updateForm" extends="summer">
+        <put-attribute name="title" value="MediaGroup updateForm 2.0" />
+        <put-attribute name="body" value="/mediagroup/updateForm.jsp" />
+    </definition>  
+
+    <!-- mav.setViewName("/mediagroup/deleteForm"); -->
+    <definition name="/mediagroup/deleteForm" extends="summer">
+        <put-attribute name="title" value="MediaGroup deleteForm 2.0" />
+        <put-attribute name="body" value="/mediagroup/deleteForm.jsp" />
+    </definition>  
+    
+      <!--***************** media 관련 View 선언***************** -->
+        <!-- mav.setViewName("/media/list"); -->
+    <definition name="/media/list" extends="summer">
+        <put-attribute name="title" value="Media list 2.0" />
+        <put-attribute name="body" value="/media/list.jsp" />
+    </definition>
+    
+        
+    <!-- mav.setViewName("/media/createForm"); -->
+    <definition name="/media/createForm" extends="summer">
+        <put-attribute name="title" value="Media create 2.0" />
+        <put-attribute name="body" value="/media/createForm.jsp" />
+    </definition>
+       
+    <!-- mav.setViewName("/media/msgView"); -->
+    <definition name="/media/msgView" extends="summer">
+        <put-attribute name="title" value="media  Msgview 2.0" />
+        <put-attribute name="body" value="/media/msgView.jsp" />
+    </definition>       
+
+    <!-- mav.setViewName("/media/updateForm"); -->
+    <definition name="/media/updateForm" extends="summer">
+        <put-attribute name="title" value="media update 2.0" />
+        <put-attribute name="body" value="/media/updateForm.jsp" />
+    </definition>  
+
+    <!-- mav.setViewName("/media/deleteForm"); -->
+    <definition name="/media/deleteForm" extends="summer">
+        <put-attribute name="title" value="media delete 2.0" />
+        <put-attribute name="body" value="/media/deleteForm.jsp" />
+    </definition>  
+    
+     <!-- mav.setViewName("/media/readMP3"); -->
+    <definition name="/media/readMP3" extends="summer">
+        <put-attribute name="title" value="media readMP3 2.0" />
+        <put-attribute name="body" value="/media/readMP3.jsp" />
+    </definition>  
+     
+     <!-- mav.setViewName("/media/readMP4"); -->
+    <definition name="/media/readMP4" extends="summer">
+        <put-attribute name="title" value="media readMP4 2.0" />
+        <put-attribute name="body" value="/media/readMP4.jsp" />
+    </definition>  
+    
+         <!-- mav.setViewName("/media/readMP4"); -->
+    <definition name="/reply/list" extends="summer">
+        <put-attribute name="title" value="reply  list 2.0" />
+        <put-attribute name="body" value="/reply/list.jsp" />
+    </definition> 
+               
+    <!-- ***********************************************        
+         중복 아이디 검사등 파업창 레이아웃, 메뉴 필요 없음,
+         header, footer를 제거한 경우 
+         *********************************************** -->
+    <definition name="popup" 
+                template="/menu/popupLayout.jsp">
+    </definition>   
+    
+    <definition name="/member/idCheckForm" extends="popup">
+        <put-attribute name="title" value="ID check" />
+        <put-attribute name="body" value="/member/idCheckForm.jsp" />
+    </definition>
+    <definition name="/member/emailCheckForm" extends="popup">
+        <put-attribute name="title" value="email check" />
+        <put-attribute name="body" value="/member/emailCheckForm.jsp" />
+    </definition>
+    
+</tiles-definitions>
+
